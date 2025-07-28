@@ -1,0 +1,81 @@
+// import 'reflect-metadata';
+// import { DataSource, DataSourceOptions } from 'typeorm';
+// import * as dotenv from 'dotenv';
+// dotenv.config();
+
+// export const AppDataSource = new DataSource({
+//   type: process.env.DATABASE_TYPE,
+//   url: process.env.DATABASE_URL,
+//   host: process.env.DATABASE_HOST,
+//   port: process.env.DATABASE_PORT
+//     ? parseInt(process.env.DATABASE_PORT, 10)
+//     : 5432,
+//   username: process.env.DATABASE_USERNAME,
+//   password: process.env.DATABASE_PASSWORD,
+//   database: process.env.DATABASE_NAME,
+//   synchronize: process.env.DATABASE_SYNCHRONIZE === 'true',
+//   dropSchema: false,
+//   keepConnectionAlive: true,
+//   logging: process.env.NODE_ENV !== 'production',
+//   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+//   migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
+//   cli: {
+//     entitiesDir: 'src',
+
+//     subscribersDir: 'subscriber',
+//   },
+//   extra: {
+//     // based on https://node-postgres.com/api/pool
+//     // max connection pool size
+//     max: process.env.DATABASE_MAX_CONNECTIONS
+//       ? parseInt(process.env.DATABASE_MAX_CONNECTIONS, 10)
+//       : 100,
+//     ssl:
+//       process.env.DATABASE_SSL_ENABLED === 'true'
+//         ? {
+//             rejectUnauthorized:
+//               process.env.DATABASE_REJECT_UNAUTHORIZED === 'true',
+//             ca: process.env.DATABASE_CA ?? undefined,
+//             key: process.env.DATABASE_KEY ?? undefined,
+//             cert: process.env.DATABASE_CERT ?? undefined,
+//           }
+//         : undefined,
+//   },
+// } as DataSourceOptions);
+
+import 'reflect-metadata';
+import { DataSource } from 'typeorm';
+import * as dotenv from 'dotenv';
+import { config } from 'dotenv';
+
+config(); // Load environment variables
+
+export const AppDataSource = new DataSource({
+  type: 'postgres', // Explicitly set the type
+  url: process.env.DATABASE_URL,
+  host: process.env.DATABASE_HOST,
+  port: parseInt(process.env.DATABASE_PORT || '5432', 10),
+  username: process.env.DATABASE_USERNAME,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME,
+  synchronize: false, // Important for migrations
+  logging: true,
+  entities: ['src/**/*.entity{.ts,.js}'],
+  migrations: ['src/database/migrations/**/*{.ts,.js}'],
+});
+
+// Add this method to initialize the data source
+export const initializeDataSource = async () => {
+  try {
+    await AppDataSource.initialize();
+    console.log('Data Source has been initialized!');
+  } catch (err) {
+    console.error('Error during Data Source initialization', err);
+    throw err;
+  }
+};
+
+// If this file is being run directly (for migrations)
+if (require.main === module) {
+  initializeDataSource();
+}

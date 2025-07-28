@@ -1,0 +1,114 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>{{title}}</title>
+  </head>
+  <body
+    style="margin:0;padding:0;background-color:#f0f2f5;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;-webkit-font-smoothing:antialiased;"
+  >
+    <table
+      width='100%'
+      cellpadding='0'
+      cellspacing='0'
+      style='min-height:100vh;'
+    >
+      <tr>
+        <td align='center' style='padding:24px;'>
+          <table
+            width='100%'
+            cellpadding='0'
+            cellspacing='0'
+            style='max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:12px;box-shadow:0 4px 6px rgba(0,0,0,0.1);'
+          >
+            <!-- Header -->
+            <tr>
+              <td
+                style='padding:40px 0;background:linear-gradient(135deg, #2563eb 0%, #1e40af 100%);border-radius:12px 12px 0 0;text-align:center;'
+              >
+                <h1
+                  style='margin:0;color:#ffffff;font-size:32px;font-weight:700;'
+                >Fusion Pro</h1>
+                <p style='margin:8px 0 0;color:#e2e8f0;font-size:16px;'>Email
+                  Verification</p>
+              </td>
+            </tr>
+
+            <!-- Content -->
+            <tr>
+              <td style='padding:40px 48px;'>
+                <h2
+                  style='margin:0 0 16px;color:#1e293b;font-size:24px;font-weight:600;'
+                >Welcome!</h2>
+                <p
+                  style='margin:0 0 24px;color:#475569;font-size:16px;line-height:24px;'
+                >
+                  Thank you for creating an account. To ensure the security of
+                  your account and access all features, please verify your email
+                  address.
+                </p>
+
+                <!-- Code Box -->
+                <div
+                  style='background:linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);border-radius:12px;padding:32px;margin:32px 0;text-align:center;border:2px dashed #2563eb;'
+                >
+                  <div
+                    style="font-family:'Courier New',monospace;font-size:40px;font-weight:700;color:#2563eb;letter-spacing:8px;"
+                  >
+                    {{hash}}
+                  </div>
+                  <p style='margin:16px 0 0;color:#64748b;font-size:14px;'>
+                    This code will expire in
+                    <strong style='color:#2563eb'>{{tokenExpires}}</strong>
+                  </p>
+                </div>
+
+                {{!-- <!-- Action Button -->
+                <div style='text-align:center;margin:32px 0;'>
+                  <a
+                    href='{{url}}'
+                    style='display:inline-block;padding:16px 32px;background:linear-gradient(135deg, #2563eb 0%, #1e40af 100%);color:#ffffff;text-decoration:none;border-radius:8px;font-weight:600;font-size:16px;'
+                  >
+                    Verify Email Address
+                  </a>
+                </div> --}}
+
+                <!-- Security Notice -->
+                <div
+                  style='background-color:#fef2f2;border-left:4px solid #dc2626;border-radius:4px;padding:16px;margin:24px 0;'
+                >
+                  <p
+                    style='margin:0;color:#991b1b;font-size:14px;line-height:20px;'
+                  >
+                    For your security: If you did not create an account with
+                    Fusion Pro, please ignore this email or contact our support
+                    team immediately.
+                  </p>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td
+                style='background-color:#f8fafc;padding:32px;text-align:center;border-radius:0 0 12px 12px;border-top:1px solid #e2e8f0;'
+              >
+                <p style='margin:0 0 16px;color:#475569;font-size:14px;'>
+                  Need help? Contact our support team at<br />
+                  <a
+                    href='mailto:support@fusionpro.com'
+                    style='color:#2563eb;text-decoration:none;'
+                  >{{SUPPORT_EMAIL}}</a>
+                </p>
+                <p style='margin:0;color:#64748b;font-size:12px;'>
+                  &copy; 2025 Fusion Pro. All rights reserved.<br />
+                  Your security is our priority
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
