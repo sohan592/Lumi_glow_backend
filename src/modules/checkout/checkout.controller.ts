@@ -41,9 +41,9 @@ import { StripeService } from './stripe.service';
   path: 'user/checkout',
   version: '1',
 })
-// @ApiBearerAuth()
-// @UseGuards(AuthGuard('jwt'), RolesGuard)
-// @Roles(RoleEnum.USER)
+@ApiBearerAuth()
+@UseGuards(AuthGuard('jwt'), RolesGuard)
+@Roles(RoleEnum.USER)
 export class UserCheckoutController {
   constructor(
     private readonly checkoutService: CheckoutService,
