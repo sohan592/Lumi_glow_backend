@@ -43,8 +43,8 @@ import { Request } from 'express';
 export class ProductController {
   constructor(private readonly service: ProductService) {}
 
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'))
+  // @ApiBearerAuth()
+  // @UseGuards(AuthGuard('jwt'))
   @ApiOkResponse({
     type: PaginationResponseDto<ProductOutputDto>,
   })
@@ -158,8 +158,8 @@ export class ProductController {
   }
 
   //get product by id
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'))
+  // @ApiBearerAuth()
+  // @UseGuards(AuthGuard('jwt'))
   @SerializeOptions({
     groups: ['me'],
   })
@@ -175,9 +175,8 @@ export class ProductController {
   })
   public findOne(
     @Param('id') id: ProductOutputDto['id'],
-    @Req() req: Request,
   ): Promise<NullableType<ProductOutputDto>> {
-    return this.service.findById(id, req.user['id']);
+    return this.service.findById(id, 1);
   }
 
   //get all products

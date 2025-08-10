@@ -17,6 +17,14 @@ export class CategoryService {
   constructor(private readonly categoryRepository: CategoryRepository) {}
 
   async create(dto: CreateCategoryDto): Promise<CategoryDto> {
+    if (dto.name && !dto.slug) {
+      dto.slug = dto.name
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+    }
     const category = await this.categoryRepository.create(dto);
     return category;
   }
