@@ -202,7 +202,10 @@ export class CheckoutRepository {
       },
       notes: dto.notes,
       status: { id: 5 }, // Pending status
-      paymentStatus: PaymentStatus.PENDING,
+      paymentStatus:
+        dto?.paymentMethod === 'stripe'
+          ? PaymentStatus.PAID
+          : PaymentStatus.PENDING,
     });
 
     const savedCheckout = await this.checkoutRepository.save(checkout);
