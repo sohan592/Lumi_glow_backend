@@ -106,6 +106,10 @@ export class CheckoutRepository {
       shippingAddress: { id: dto.shippingAddressId },
       shippingMethod: { id: dto.shippingMethodId },
       paymentMethod: dto.paymentMethod,
+      paymentStatus:
+        dto.paymentMethod === 'stripe'
+          ? PaymentStatus.PAID
+          : PaymentStatus.PENDING,
       coupon: {
         id: couponDetails?.id,
       },
@@ -185,6 +189,10 @@ export class CheckoutRepository {
     const couponDetails = await this.couponRepository.findOne({
       where: { code: dto.couponCode },
       relations: ['products', 'categories', 'status'],
+    });
+
+    console.log({
+      method: dto.paymentMethod,
     });
 
     // Create checkout
